@@ -1,0 +1,4 @@
+{:deps
+ {com.techascent/tmducken {:mvn/version "0.8.1-12"}
+  techascent/tech.ml.dataset {:mvn/version "7.009"}}}
+
