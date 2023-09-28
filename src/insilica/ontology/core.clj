@@ -86,10 +86,6 @@
     nil
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#domain")
    (clazz
-    "XMLDouble"
-    nil
-    "http://www.w3.org/2001/XMLSchema#Double")
-   (clazz
     "Literal"
     nil
     "http://www.w3.org/2000/01/rdf-schema#Literal")
@@ -105,6 +101,14 @@
     "Type"
     "The subject is an instance of a class."
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+   (clazz
+    "XMLDate"
+    nil
+    "http://www.w3.org/2001/XMLSchema#Date")
+   (clazz
+    "XMLDouble"
+    nil
+    "http://www.w3.org/2001/XMLSchema#Double")
    (clazz
     "XMLString"
     nil
