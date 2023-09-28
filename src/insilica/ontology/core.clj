@@ -8,8 +8,13 @@
 (defn iri? [x]
   (instance? IRI x))
 
-(defn iri [s]
-  (IRI. s))
+(def re-iri #"^[a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=%]+$")
+
+(defn ->iri [s]
+  (if (re-find re-iri s)
+    (IRI. s)
+    (throw (ex-info (str "Invalid IRI: " s)
+                    {:re re-iri :s s}))))
 
 (defrecord Triple [subj pred obj])
 
@@ -19,10 +24,10 @@
 (defrecord Clazz [name doc iri property-type resource-prefix])
 
 (defn clazz [name doc iri & {:keys [property-type resource-prefix]}]
-  (Clazz. name doc (IRI. iri) property-type resource-prefix))
+  (Clazz. name doc (->iri iri) property-type resource-prefix))
 
 (defn resource-iri [{:keys [resource-prefix]} resource-id]
-  (IRI. (str resource-prefix resource-id)))
+  (->iri (str resource-prefix resource-id)))
 
 (defn literal-property
   [{:as clazz :keys [doc property-type resource-prefix]}
@@ -39,7 +44,7 @@
 
 (defn has-fn [{:as clazz :keys [iri name property-type]}]
   (fn [subj resource-id-or-property]
-    (let [has-iri (IRI. (str "http://example.com#has" name))]
+    (let [has-iri (->iri (str "http://example.com#has" name))]
       (if property-type
         (let []
           (concat
@@ -51,7 +56,7 @@
         (let [tgt-iri (resource-iri clazz resource-id-or-property)]
           [(triple
             tgt-iri
-            (IRI. "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+            (->iri "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
             iri)
            (triple
             subj
@@ -114,7 +119,7 @@
    (if (iri? type)
      type
      (or (:iri type)
-         (IRI. type)))))
+         (->iri type)))))
 
 (defn nt-repr [s]
   (if (iri? s)
