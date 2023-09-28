@@ -6,7 +6,7 @@
     "AC50"
     "The effective concentration of a perturbagen, which produces 50% of the maximal possible response, which could mean either activation (EC50) or inhibition (IC50) for that perturbagen."
     "http://www.bioassayontology.org/bao#BAO_0000186"
-    :property-type ont/Literal)
+    :property-type ont/XMLDouble)
    (clazz
     "CASNumber"
     "Identifier used by the Chemical Abstracts Service database."
@@ -16,7 +16,7 @@
     "Efficacy"
     "The maximum response that can be achieved with the perturbagen as percentage of the positive control."
     "http://www.bioassayontology.org/bao#BAO_0000656"
-    :property-type ont/Literal)
+    :property-type ont/XMLDouble)
    (clazz
     "ProtocolName"
     nil
@@ -46,7 +46,7 @@
     "SampleName"
     nil
     "http://example.com/SampleName"
-    :property-type ont/Literal)
+    :property-type ont/XMLString)
    (clazz
     "SMILES"
     nil
